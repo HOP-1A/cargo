@@ -124,3 +124,92 @@
     @apply bg-background text-foreground;
   }
 }
+.whiteheader {
+  /* background-image: url('https://img.freepik.com/premium-photo/abstract-bokeh-pink-pastel-background_707519-17321.jpg?semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+  padding: 20px;
+}
+
+.flexrow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+ justify-content: center;
+}
+
+.nav-logo img {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.nav-item {
+  margin: 0 15px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-item:hover {
+  color: #ff4081;
+}
+
+.round-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 20px;
+}
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.rainbow-text {
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s ease infinite;
+}
+
+.button1{
+  background-color: rgb(129, 37, 235);
+  color: white;
+}
+.button2{
+  background-color: white;
+  color: rgb(129, 37, 235);
+}
+.button1, .button2 {
+  font-size: 18px;
+  padding: 15px 30px;
+  margin: 0 10px;
+}
+.h1-text{
+  font-size: 46px;
+  font-weight:500;
+}
+.search-input {
+  max-width: 700px;
+  height: 40px;
+  width: 100%; 
+  margin: 20px 0; 
+}
