@@ -1,5 +1,6 @@
 'use client'
 import UserInfo from "./components/userinfo"
+import Instruction from "./components/instruction"
 import { useState } from "react"
 
 
@@ -22,7 +23,7 @@ const Page = () => {
                     </div>
                     {selected === "accinfo" && <p>You selected Option 1!</p>}
                     {selected === "package" && <p>You selected Option 2!</p>}
-                    {/* {selected === "instruction" && } */}
+                    {selected === "instruction" && <Instruction></Instruction>}
                     {selected === "" && <UserInfo></UserInfo>}                                      
         </div>
     )
