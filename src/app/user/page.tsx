@@ -21,10 +21,9 @@ const Page = () => {
                             <a className="cursor-pointer font-bold mt-4">Гарах</a>
                         </div>
                     </div>
-                    {selected === "accinfo" && <p>You selected Option 1!</p>}
+                    {selected === "accinfo" && <UserInfo></UserInfo>}
                     {selected === "package" && <p>You selected Option 2!</p>}
-                    {selected === "instruction" && <Instruction></Instruction>}
-                    {selected === "" && <UserInfo></UserInfo>}                                      
+                    {selected === "instruction" && <Instruction></Instruction>}                                      
         </div>
     )
 }
