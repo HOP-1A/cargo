@@ -1,4 +1,6 @@
 'use client'
+import { HuleenAwagchiinMedeelel } from "./components/HuleenAwagchiinMedeelel"
+import { IlgeegchiinMedeelel } from "./components/ilgeegchiinMedeelel"
 import UserInfo from "./components/userinfo"
 import { useState } from "react"
 
@@ -23,7 +25,7 @@ const Page = () => {
                     {selected === "accinfo" && <p>You selected Option 1!</p>}
                     {selected === "package" && <p>You selected Option 2!</p>}
                     {/* {selected === "instruction" && } */}
-                    {selected === "" && <UserInfo></UserInfo>}                                      
+                    {selected === "" && <UserInfo></UserInfo>}      
         </div>
     )
 }
