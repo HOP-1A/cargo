@@ -1,3 +1,10 @@
+const Instruction = () => {
 
+    return(
+        <div>
+            sda
+        </div>
+    )
+}
 
-// const 
+export default Instruction
