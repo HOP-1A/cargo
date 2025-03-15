@@ -4,15 +4,15 @@ import { NextResponse } from "next/server"
 export const GET = async(req: Request) => {
     try{
 
-        const Packages = await prisma.packages.findMany({});
+        const packages = await prisma.packages.findMany({});
 
-        if(!Packages) return NextResponse.json({message: 'Package not found'})
+        if(!packages) return NextResponse.json({message: 'Package not found'})
 
         let pending = 0
         let delivered = 0
         let inTransit = 0
 
-        Packages.forEach(obj => {
+        packages.forEach(obj => {
             if (obj.status === 'Pending') {
                 pending += 1;
             }else if(obj.status === 'Delivered'){
@@ -22,7 +22,7 @@ export const GET = async(req: Request) => {
             }
         });
 
-        return NextResponse.json({message: 'Done', info: [{"pending": pending}, {"delivered": delivered}, {"inTransit": inTransit}]})
+        return NextResponse.json({ data: [{"pending": pending}, {"delivered": delivered}, {"inTransit": inTransit}]})
     }catch(err){
         return NextResponse.json(err, {status: 500})
     }

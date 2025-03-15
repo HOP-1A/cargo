@@ -12,7 +12,7 @@ export const POST = async(req: Request) => {
         })
         if(!packages) return NextResponse.json({message: 'Package not found'})
 
-        return NextResponse.json({message: 'found', info: packages})
+        return NextResponse.json({packages})
     }catch(err){
         return NextResponse.json(err, {status: 500})
     }

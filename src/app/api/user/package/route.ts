@@ -5,7 +5,7 @@ export const POST = async(req: Request) => {
     try{
         const body = await req.json()
 
-        const Packages = await prisma.packages.findMany({
+        const packages = await prisma.packages.findMany({
             where: {
               OR: [
                 { receiverPhoneNumber: String(body.phoneNumber) },
@@ -14,9 +14,9 @@ export const POST = async(req: Request) => {
             }
           });
 
-        if(!Packages) return NextResponse.json({message: 'Package not found'})
+        if(!packages) return NextResponse.json({message: 'Package not found'})
 
-        return NextResponse.json({message: 'logged in', info: Packages})
+        return NextResponse.json({packages})
     }catch(err){
         return NextResponse.json(err, {status: 500})
     }
