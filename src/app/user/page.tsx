@@ -23,7 +23,7 @@ const Page = () => {
                     </div>
                     {selected === "accinfo" && <p>You selected Option 1!</p>}
                     {selected === "package" && <PackageForm></PackageForm>}
-                    {selected === "instruction" && <p>sda</p>}
+                    {selected === "instruction" && <p>icltspmo</p>}
                     {selected === "" && <UserInfo></UserInfo>}                                      
         </div>
     )
