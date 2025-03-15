@@ -1,7 +1,7 @@
 import * as React from "react";
-
+ 
 import { cn } from "@/lib/utils";
-
+ 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -14,7 +14,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -24,7 +24,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -34,7 +34,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -44,7 +44,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -54,7 +54,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -64,7 +64,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
+ 
 export {
   Card,
   CardHeader,
