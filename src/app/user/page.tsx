@@ -1,4 +1,5 @@
 'use client'
+import PackageForm from "./components/add"
 import UserInfo from "./components/userinfo"
 import { useState } from "react"
 
@@ -21,8 +22,8 @@ const Page = () => {
                         </div>
                     </div>
                     {selected === "accinfo" && <p>You selected Option 1!</p>}
-                    {selected === "package" && <p>You selected Option 2!</p>}
-                    {/* {selected === "instruction" && } */}
+                    {selected === "package" && <PackageForm></PackageForm>}
+                    {selected === "instruction" && <p>icltspmo</p>}
                     {selected === "" && <UserInfo></UserInfo>}                                      
         </div>
     )
