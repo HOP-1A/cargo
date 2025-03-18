@@ -27,3 +27,21 @@ export const GET = async(req: Request) => {
         return NextResponse.json(err, {status: 500})
     }
 }
+
+export const PUT = async(req: Request) => {
+    try{
+        const body = await req.json()
+        console.log(body)
+        const packages = await prisma.packages.update({
+            where: {
+                id: String(body.packageId)
+            },
+            data: {
+                status: String(body.status)
+            }
+        })
+        return NextResponse.json('Done')
+    }catch(err){
+        return NextResponse.json(err, {status: 500})
+    }
+}
