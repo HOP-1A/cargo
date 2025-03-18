@@ -13,7 +13,7 @@ export default function HomePage() {
       </h1>
       <Input placeholder="Утас болон кодоор хайх..." className="search-input" />
       <div className="flexrow">
-        <Link href={"/zaavar"}>
+        <Link href={"/instructions.php"}>
           <Button className="button1 cursor-pointer">Заавар</Button>
         </Link>
         <Link href={"/tootsooluur"}>

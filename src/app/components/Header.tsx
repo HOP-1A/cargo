@@ -35,7 +35,7 @@ export default function Header() {
           <Link href={"/tootsooluur"}>
             <div className="nav-item">Тооцоолуур</div>
           </Link>
-          <Link href={"/zaavar"}>
+          <Link href={"/instructions.php"}>
             <div className="nav-item">Заавар</div>
           </Link>
           <Link href={"/user"}>
