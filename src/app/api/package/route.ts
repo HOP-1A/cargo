@@ -3,8 +3,9 @@ import { NextResponse } from "next/server"
 
 export const GET = async(req: Request) => {
     try{
-
-        const packages = await prisma.packages.findMany({});
+        console.log('sdsa')
+        const packages = await prisma.packages.findMany();
+        console.log(packages)
 
         if(!packages) return NextResponse.json({message: 'Package not found'})
 

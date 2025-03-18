@@ -1,25 +1,87 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  const deliveries = [
-    { id: "DEL-1001", customer: "Acme Corporation", destination: "123 Business Ave, NY", date: "2025-03-12", status: "In Transit", items: 3, weight: "45.2kg", priority: "High" },
-    { id: "DEL-1002", customer: "TechSolutions Inc.", destination: "456 Tech Park, SF", date: "2025-03-12", status: "Pending", items: 1, weight: "12.5kg", priority: "Medium" },
-    { id: "DEL-1003", customer: "Global Logistics", destination: "789 Shipping Lane, Miami", date: "2025-03-13", status: "Delivered", items: 5, weight: "78.9kg", priority: "Low" },
-    { id: "DEL-1004", customer: "Quick Deliveries", destination: "321 Fast Road, Chicago", date: "2025-03-13", status: "Pending", items: 2, weight: "23.7kg", priority: "High" },
-  ];
+  const [deliveries, setDeliveries] = useState(""); // Default to empty array
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
 
-  const totalDeliveries = deliveries.length;
-  const inTransit = deliveries.filter(d => d.status === "In Transit").length;
-  const delivered = deliveries.filter(d => d.status === "Delivered").length;
-  const pending = deliveries.filter(d => d.status === "Pending").length;
+  useEffect(() => {
+    const fetchDeliveries = async () => {
+      try {
+        const response = await fetch('api/package', {
+          method: 'GET',
+        });
+        
+        const data = await response.json();
+        console.log("Fetched data:", data); // Log the response data for debugging
+
+        // Ensure the data is an array
+      
+          setDeliveries(data.packages);
+      
+
+        setIsLoading(false); // Set loading to false after data is fetched
+      } catch (err) {
+        console.error("Error fetching deliveries:", err);
+        setError("Failed to load deliveries.");
+        setIsLoading(false);
+      }
+    };
+
+    fetchDeliveries();
+  }, []);
+
+  // If still loading, show loading indicator or prevent filtering
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-6">
+        <div>Loading deliveries...</div>
+      </div>
+    );
+  }
+
+  // If there's an error, show the error message
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-6">
+        <div>{error}</div>
+      </div>
+    );
+  }
+
+  // Now that we are sure deliveries is an array, filter it
+  const filteredDeliveries = deliveries.filter(d => {
+    return (
+      d.packageNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.senderName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.senderPhoneNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.status?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
+  const totalDeliveries = filteredDeliveries.length;
+  const inTransit = filteredDeliveries.filter(d => d.status === "In Transit").length;
+  const delivered = filteredDeliveries.filter(d => d.status === "Delivered").length;
+  const pending = filteredDeliveries.filter(d => d.status === "Pending").length;
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Cargo Admin</h1>
         <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">New Delivery</button>
+      </div>
+
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search deliveries..."
+          className="w-full p-2 border rounded"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
 
       <div className="grid grid-cols-4 gap-4 mb-6">
@@ -34,25 +96,27 @@ export default function Home() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-200">
-              <th className="p-2 text-left">ID</th>
-              <th className="p-2 text-left">Customer</th>
-              <th className="p-2 text-left">Destination</th>
-              <th className="p-2 text-left">Date</th>
-              <th className="p-2 text-left">Status</th>
-              <th className="p-2 text-left">Items</th>
-              <th className="p-2 text-left">Weight</th>
+              <th className="p-2 text-left">Ачааны дугаар</th>
+              <th className="p-2 text-left">Илгээгчийн нэр</th>
+              <th className="p-2 text-left">Илгээгчийн утасны дугаар</th>
+              <th className="p-2 text-left">Хүлээн авагчийн нэр</th>
+              <th className="p-2 text-left">Хүлээн авагчийн утасны дугаар</th>
+              <th className="p-2 text-left">ширхэг</th>
+              <th className="p-2 text-left">байдал</th>
+              <th className="p-2 text-left">Кг/эзэлхүүн</th>
             </tr>
           </thead>
           <tbody>
-            {deliveries.map((d) => (
+            {filteredDeliveries.map((d) => (
               <tr key={d.id} className="border-b">
-                <td className="p-2">{d.id}</td>
-                <td className="p-2">{d.customer}</td>
-                <td className="p-2">{d.destination}</td>
-                <td className="p-2">{d.date}</td>
+                <td className="p-2">{d.packageNumber}</td>
+                <td className="p-2">{d.senderName}</td>
+                <td className="p-2">{d.senderPhoneNumber}</td>
+                <td className="p-2">{d.receiverName}</td>
+                <td className="p-2">{d.receiverPhoneNumber}</td>
+                <td className="p-2">{d.quantity}ш</td>
                 <td className={`p-2 ${getStatusColor(d.status)}`}>{d.status}</td>
-                <td className="p-2">{d.items}</td>
-                <td className="p-2">{d.weight}</td>
+                <td className="p-2">{d.weight}Кг</td>
               </tr>
             ))}
           </tbody>
@@ -71,7 +135,6 @@ function StatCard({ title, value, change }) {
     </div>
   );
 }
-
 
 function getStatusColor(status) {
   switch (status) {
