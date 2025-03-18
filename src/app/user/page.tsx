@@ -40,9 +40,8 @@ const Page = () => {
         </div>
       </div>
       {selected === "accinfo" && <UserInfo />}
-      {selected === "package" && <p>You selected Option 2!</p>}
+      {selected === "package" && <PackageForm />}
       {/* {selected === "instruction" && } */}
-      {selected === "" && <PackageForm />}
     </div>
   );
 };
