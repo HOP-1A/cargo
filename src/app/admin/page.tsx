@@ -2,10 +2,10 @@
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [deliveries, setDeliveries] = useState(""); // Default to empty array
+  const [deliveries, setDeliveries] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [isLoading, setIsLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
 
   useEffect(() => {
@@ -16,16 +16,14 @@ export default function Home() {
         });
         
         const data = await response.json();
-        console.log("Fetched data:", data); // Log the response data for debugging
 
-        // Ensure the data is an array
+       
       
           setDeliveries(data.packages);
       
 
-        setIsLoading(false); // Set loading to false after data is fetched
+        setIsLoading(false); 
       } catch (err) {
-        console.error("Error fetching deliveries:", err);
         setError("Failed to load deliveries.");
         setIsLoading(false);
       }
@@ -34,7 +32,6 @@ export default function Home() {
     fetchDeliveries();
   }, []);
 
-  // If still loading, show loading indicator or prevent filtering
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 p-6">
@@ -43,7 +40,6 @@ export default function Home() {
     );
   }
 
-  // If there's an error, show the error message
   if (error) {
     return (
       <div className="min-h-screen bg-gray-100 p-6">
@@ -52,7 +48,6 @@ export default function Home() {
     );
   }
 
-  // Now that we are sure deliveries is an array, filter it
   const filteredDeliveries = deliveries.filter(d => {
     return (
       d.packageNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
