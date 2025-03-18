@@ -1,8 +1,9 @@
-"use client";
+'use client'
+import PackageForm from "./components/ilgeemj"
 import UserInfo from "./components/userinfo";
-import Packages from "./components/package";
 import { useState } from "react";
 import Link from "next/link";
+
 
 const Page = () => {
   const [username, setUsername] = useState("UserEndBn");
@@ -41,7 +42,7 @@ const Page = () => {
       {selected === "accinfo" && <UserInfo />}
       {selected === "package" && <p>You selected Option 2!</p>}
       {/* {selected === "instruction" && } */}
-      {selected === "" && <Packages />}
+      {selected === "" && <PackageForm />}
     </div>
   );
 };
