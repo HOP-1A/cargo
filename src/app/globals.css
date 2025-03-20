@@ -189,6 +189,15 @@
   -webkit-text-fill-color: transparent;
   animation: rainbow 3s ease infinite;
 }
+.rainbow-text2 {
+  font-size: 58px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffb3b3, #ffdda8, #e7f6c5, #c0e1ff, #d8baff, #ffb3f7, #ffb3e6);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s ease infinite;
+}
 
 .button1{
   background-color: rgb(129, 37, 235);
@@ -212,4 +221,7 @@
   height: 40px;
   width: 100%; 
   margin: 20px 0; 
+}
+.bluelink-text{
+  color: rgb(91, 41, 239);
 }

@@ -39,7 +39,6 @@ export default function HomePage() {
 
   // useEffect hook to log data after it is updated
   useEffect(() => {
-    console.log("Updated data:", data); // This will run whenever 'data' changes
   }, [data]);
 
   return (
@@ -62,7 +61,7 @@ export default function HomePage() {
       </div>
 
       <div className="flexrow">
-        <Link href={"/zaavar"}>
+        <Link href={"/instructions.php"}>
           <Button className="button1 cursor-pointer">Заавар</Button>
         </Link>
         <Link href={"/tootsooluur"}>

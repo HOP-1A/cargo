@@ -1,24 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 export default function Header() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
   return (
-    <div className="whiteheader flex-column">
+    <div className="whiteheader flex-column bg-white">
       <nav className="flexrow">
         <a className="nav-logo">
           <Link href={"/"}>
@@ -35,7 +20,7 @@ export default function Header() {
           <Link href={"/tootsooluur"}>
             <div className="nav-item">Тооцоолуур</div>
           </Link>
-          <Link href={"/zaavar"}>
+          <Link href={"/instructions.php"}>
             <div className="nav-item">Заавар</div>
           </Link>
           <Link href={"/user"}>
@@ -45,10 +30,7 @@ export default function Header() {
             />
           </Link>
 
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-3 rounded-full cursor-pointer"
-          >
+          <button className="p-3 rounded-full cursor-pointer">
             <img
               src="https://static-00.iconduck.com/assets.00/dark-theme-icon-2048x2048-ymrfkxsy.png"
               alt="Dark and Light Mode Icon"
