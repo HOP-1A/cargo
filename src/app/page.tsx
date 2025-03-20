@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PackageInfo from "./components/packageInfo";
+import Footer from "./components/footer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -68,6 +69,7 @@ export default function HomePage() {
           <Button className="button2 cursor-pointer">Тооцоолуур</Button>
         </Link>
       </div>
+      <Footer/>
     </div>
   );
 }

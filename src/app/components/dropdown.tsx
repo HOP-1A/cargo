@@ -1,6 +1,6 @@
-"use client"
-import * as React from "react"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,27 +9,33 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
- 
-export function DropdownMenuRadioGroupDemo() {
-    
-  const [position, setPosition] = React.useState("bottom")
- 
+} from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
+
+export function DropdownMenuRadioGroupDemo({ id, currentStatus, onStatusChange }) {
+  const [status, setStatus] = useState(currentStatus);
+
+  const handleStatusChange = (newStatus) => {
+    setStatus(newStatus);
+    onStatusChange(id, newStatus); 
+  
+  };
+
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">...</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+        <DropdownMenuLabel>Package Status</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Delivered</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Pending</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">In Transit
-          </DropdownMenuRadioItem>  
+        <DropdownMenuRadioGroup value={status} onValueChange={handleStatusChange}>
+          <DropdownMenuRadioItem value="Delivered">Delivered</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Pending">Pending</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="In Transit">In Transit</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
+
