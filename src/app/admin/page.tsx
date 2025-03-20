@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import { DropdownMenuRadioGroupDemo } from "../components/dropdown";
 
 
-interface Delivery {
+
+type Delivery = {
+
   id: string;
   packageNumber: string;
   senderName: string;
