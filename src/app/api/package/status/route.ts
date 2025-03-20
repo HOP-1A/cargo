@@ -11,6 +11,7 @@ export const GET = async(req: Request) => {
         let pending = 0
         let delivered = 0
         let inTransit = 0
+        let shipped = 0
 
         packages.forEach(obj => {
             if (obj.status === 'Pending') {
@@ -19,10 +20,12 @@ export const GET = async(req: Request) => {
                 delivered += 1
             }else if(obj.status === 'In Transit'){
                 inTransit += 1 
+            }else if(obj.status === 'Shipped'){
+                shipped += 1
             }
         });
 
-        return NextResponse.json({ data: [{"pending": pending}, {"delivered": delivered}, {"inTransit": inTransit}]})
+        return NextResponse.json({ data: [{"pending": pending}, {"delivered": delivered}, {"inTransit": inTransit}, {"shipped": shipped}]})
     }catch(err){
         return NextResponse.json(err, {status: 500})
     }
@@ -31,6 +34,7 @@ export const GET = async(req: Request) => {
 export const PUT = async(req: Request) => {
     try{
         const body = await req.json()
+        console.log(body)
         const packages = await prisma.packages.update({
             where: {
                 id: String(body.packageId)
