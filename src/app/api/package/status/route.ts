@@ -34,7 +34,6 @@ export const GET = async(req: Request) => {
 export const PUT = async(req: Request) => {
     try{
         const body = await req.json()
-        console.log(body)
         const packages = await prisma.packages.update({
             where: {
                 id: String(body.packageId)
