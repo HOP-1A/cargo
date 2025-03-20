@@ -37,4 +37,6 @@ model Packages {
   destination         String
   updatedAt           DateTime @updatedAt
   createdAt           DateTime @default(now())
+  arrivedAt           DateTime?
+  receivedAt          DateTime?
 }

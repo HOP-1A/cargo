@@ -200,7 +200,6 @@
 }
 
 .button1{
-  background-color: rgb(129, 37, 235);
   color: white;
 }
 .button2{
@@ -221,6 +220,8 @@
   height: 40px;
   width: 100%; 
   margin: 20px 0; 
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .bluelink-text{
   color: rgb(91, 41, 239);

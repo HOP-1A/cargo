@@ -67,7 +67,7 @@ const UserInfo = () => {
     }
     setPhoneError("");
     return true;
-  
+  }
 
   const handleSave = () => {
     let isValid = true;
