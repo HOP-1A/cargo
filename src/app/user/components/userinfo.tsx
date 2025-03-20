@@ -154,6 +154,6 @@ const UserInfo = () => {
     </Card>
   );
 };
-} 
+
 
 export default UserInfo
