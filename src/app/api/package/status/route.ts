@@ -31,19 +31,26 @@ export const GET = async(req: Request) => {
     }
 }
 
-export const PUT = async(req: Request) => {
-    try{
-        const body = await req.json()
-        const packages = await prisma.packages.update({
-            where: {
-                id: String(body.packageId)
-            },
-            data: {
-                status: String(body.status)
-            }
-        })
-        return NextResponse.json('Done')
-    }catch(err){
-        return NextResponse.json(err, {status: 500})
+export const PUT = async (req: Request) => {
+    try {
+      const body = await req.json();
+  
+      const packageIds = body.packageIds;
+      const newStatus = body.status;
+  
+      const result = await prisma.packages.updateMany({
+        where: {
+          id: {
+            in: packageIds.map((id: string) => String(id))
+          }
+        },
+        data: {
+          status: newStatus
+        }
+      });
+  
+      return NextResponse.json('Done');
+    } catch (err) {
+      return NextResponse.json(err, { status: 500 });
     }
-}
+  };

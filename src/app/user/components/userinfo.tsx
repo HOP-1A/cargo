@@ -67,7 +67,7 @@ const UserInfo = () => {
     }
     setPhoneError("");
     return true;
-  
+  }
 
   const handleSave = () => {
     let isValid = true;
@@ -154,6 +154,6 @@ const UserInfo = () => {
     </Card>
   );
 };
-} 
+
 
 export default UserInfo
