@@ -2,16 +2,31 @@
 import { useState, useEffect } from "react";
 import { DropdownMenuRadioGroupDemo } from "../components/dropdown";
 
+
+
+type Delivery = {
+
+  id: string;
+  packageNumber: string;
+  senderName: string;
+  senderPhoneNumber: string;
+  receiverName: string;
+  receiverPhoneNumber: string;
+  quantity: number;
+  weight: number;
+  status: "In Transit" | "Delivered" | "Pending" | "Shipped"; 
+}
+
 export default function Home() {
-  const [deliveries, setDeliveries] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [deliveries, setDeliveries] = useState<Delivery[]>([]); 
+  const [searchQuery, setSearchQuery] = useState<string>(""); 
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
+  const [error, setError] = useState<string | null>(null); 
 
   const fetchDeliveries = async () => {
     try {
-      const response = await fetch('api/package', {
-        method: 'GET',
+      const response = await fetch("api/package", {
+        method: "GET",
       });
 
       const data = await response.json();
@@ -43,15 +58,15 @@ export default function Home() {
     );
   }
 
-  const updateDeliveryStatus = async (id, status) => {
+  const updateDeliveryStatus = async (id: string, status: string) => {
     try {
       const response = await fetch("api/package/status", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          packageId: String(id),
+          packageId: id,
           status: status,
         }),
       });
@@ -66,14 +81,13 @@ export default function Home() {
           delivery.id === id ? { ...delivery, status: data.status } : delivery
         )
       );
-      fetchDeliveries()
+      fetchDeliveries();
     } catch (error) {
       console.error("Error updating delivery status:", error);
     }
   };
-  
 
-  const filteredDeliveries = deliveries.filter(d => {
+  const filteredDeliveries = deliveries.filter((d) => {
     return (
       d.packageNumber?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       d.senderName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -83,10 +97,10 @@ export default function Home() {
   });
 
   const totalDeliveries = filteredDeliveries.length;
-  const inTransit = filteredDeliveries.filter(d => d.status === "In Transit").length;
-  const delivered = filteredDeliveries.filter(d => d.status === "Delivered").length;
-  const pending = filteredDeliveries.filter(d => d.status === "Pending").length;
-  const shipped = filteredDeliveries.filter(d => d.status === "Shipped").length;
+  const inTransit = filteredDeliveries.filter((d) => d.status === "In Transit").length;
+  const delivered = filteredDeliveries.filter((d) => d.status === "Delivered").length;
+  const pending = filteredDeliveries.filter((d) => d.status === "Pending").length;
+  const shipped = filteredDeliveries.filter((d) => d.status === "Shipped").length;
 
   return (
     <div className="max-h-screen bg-gray-50 p-6 over">
@@ -112,7 +126,7 @@ export default function Home() {
         <StatCard title="In Transit" value={inTransit} change="Currently on the road" />
         <StatCard title="Delivered" value={delivered} change="Completed successfully" />
         <StatCard title="Pending" value={pending} change="Order Processing" />
-        <StatCard title="shipped" value={shipped} change="available pick up" />
+        <StatCard title="Shipped" value={shipped} change="Available for pick up" />
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -158,9 +172,9 @@ export default function Home() {
   );
 }
 
-function StatCard({ title, value, change }) {
+function StatCard({ title, value, change }: { title: string, value: number, change: string }) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg text-center ">
+    <div className="bg-white p-6 rounded-lg shadow-lg text-center">
       <h3 className="text-gray-600 text-lg">{title}</h3>
       <p className="text-2xl font-semibold text-gray-800">{value}</p>
       <p className="text-sm text-gray-500">{change}</p>
@@ -168,7 +182,7 @@ function StatCard({ title, value, change }) {
   );
 }
 
-function getStatusColor(status) {
+function getStatusColor(status: string) {
   switch (status) {
     case "In Transit":
       return "text-blue-600";
@@ -176,6 +190,8 @@ function getStatusColor(status) {
       return "text-yellow-600";
     case "Delivered":
       return "text-green-600";
+    case "Shipped":
+      return "text-gray-600";
     default:
       return "text-gray-600";
   }
