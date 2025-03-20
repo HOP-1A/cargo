@@ -67,66 +67,7 @@ const UserInfo = () => {
     }
     setPhoneError("");
     return true;
-  const [emailError, setEmailError] = useState("");
-  const [addressError, setAddressError] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 8) {
-      value = value.slice(0, 8);
-    }
-    setPhone(value);
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    if (!value.includes("@")) {
-      setEmailError("И-мэйл хаяг '@' тэмдэгт агуулсан байх ёстой.");
-    } else {
-      setEmailError("");
-    }
-  };
-
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Зөв имэйл хаяг оруулна уу.");
-      return false;
-    }
-    setEmailError("");
-    return true;
-  };
-
-  const validateUsername = (username: string) => {
-    if (!username.trim()) {
-      setUsernameError("Нэрээ заавал оруулна уу.");
-      return false;
-    }
-    setUsernameError("");
-    return true;
-  };
-
-  const validateAddress = (address: string) => {
-    if (!address.trim()) {
-      setAddressError("Хаяг хоосон байж болохгүй.");
-      return false;
-    }
-    setAddressError("");
-    return true;
-  };
-
-  const validatePhone = (phone: string) => {
-    if (phone.length !== 8) {
-      setPhoneError("Утасны дугаар 8 оронтой байх ёстой.");
-      return false;
-    }
-    setPhoneError("");
-    return true;
-  };
+  
 
   const handleSave = () => {
     let isValid = true;
@@ -213,5 +154,6 @@ const UserInfo = () => {
     </Card>
   );
 };
+} 
 
-export default UserInfo;
+export default UserInfo
