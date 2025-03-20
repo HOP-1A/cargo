@@ -38,7 +38,6 @@ export default function HomePage() {
 
   // useEffect hook to log data after it is updated
   useEffect(() => {
-    console.log("Updated data:", data); // This will run whenever 'data' changes
   }, [data]);
 
   return (
