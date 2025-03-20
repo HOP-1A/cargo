@@ -12,3 +12,31 @@ export const GET = async(req: Request) => {
         return NextResponse.json(err, {status: 500})
     }
 }
+
+export const POST = async(req: Request) => {
+    try{
+        const body: {
+            packages: {
+              packageNumber: string;
+              senderName: string;
+              senderPhoneNumber: string;
+              receiverName: string;
+              receiverPhoneNumber: string;
+              quantity: number;
+              weight: number;
+              volume: number;
+              cost: number;
+              status: string;
+              destination: string;
+            }[];
+          } = await req.json();
+      
+          const newPackages = await prisma.packages.createMany({
+            data: body.packages,    
+          });
+
+          return new Response(JSON.stringify(newPackages), { status: 201 });
+    }catch(err){
+        return new Response('Internal Server Error', { status: 500 });
+    }
+}
