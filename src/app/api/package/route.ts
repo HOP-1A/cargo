@@ -14,6 +14,7 @@ export const GET = async(req: Request) => {
 }
 
 export const POST = async(req: Request) => {
+    console.log('sda')
     try{
         const body: {
             packages: {
@@ -35,7 +36,7 @@ export const POST = async(req: Request) => {
             data: body.packages,    
           });
 
-          return new Response(JSON.stringify(newPackages), { status: 201 });
+          return new Response("Done");
     }catch(err){
         return new Response('Internal Server Error', { status: 500 });
     }

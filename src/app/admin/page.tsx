@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { DropdownMenuRadioGroupDemo } from "../components/dropdown";
+import { useRouter } from "next/navigation";
 
 
 
@@ -22,6 +23,8 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>(""); 
   const [isLoading, setIsLoading] = useState<boolean>(true); 
   const [error, setError] = useState<string | null>(null); 
+
+  const router = useRouter()
 
   const fetchDeliveries = async () => {
     try {
@@ -106,7 +109,7 @@ export default function Home() {
     <div className="max-h-screen bg-gray-50 p-6 over">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Cargo Admin</h1>
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
+        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300" onClick={() => router.push('/admin/packadd')}>
           New Delivery
         </button>
       </div>

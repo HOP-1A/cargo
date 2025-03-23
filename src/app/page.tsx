@@ -40,7 +40,7 @@ export default function HomePage() {
   useEffect(() => {}, [data]);
 
   return (
-    <div className="whiteheader flex-center flex-column mt-[100px]">
+    <div className="whiteheader flex-center flex-column h-[60dvh]">
       <h1 className="h1-text"> Эрээн, Эрдэнэт</h1>
       <h1>
         <span className="rainbow-text">Тээвэр үйлчилгээ</span>
@@ -53,9 +53,13 @@ export default function HomePage() {
         />
         <Button onClick={search}>Search</Button>
       </div>
-
-      <div>
-        {data ? <PackageInfo packageData={data}></PackageInfo> : <p></p>}
+      
+      <div className="w-[80vw]">
+        {data ? (
+          <PackageInfo packageData={data}></PackageInfo>
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div className="flexrow">
@@ -66,7 +70,6 @@ export default function HomePage() {
           <Button className="button2 cursor-pointer">Тооцоолуур</Button>
         </Link>
       </div>
-      <Footer />
-    </div>
+    </div> 
   );
 }

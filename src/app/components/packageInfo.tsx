@@ -9,10 +9,9 @@ type Package = {
 };
 
 interface PackageInfoProps {
-  packageData: Package | null; // Define the type of the prop here
+  packageData: Package | null;
 }
 
-// Helper function to format the date
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
@@ -25,6 +24,22 @@ const formatDate = (dateString: string) => {
   });
 };
 
+// Function to calculate progress percentage based on status
+const getProgress = (status: string): number => {
+  switch (status) {
+    case 'Pending':
+      return 25;
+    case 'In Transit':
+      return 50;
+    case 'Shipped':
+      return 75;
+    case 'Delivered':
+      return 100;
+    default:
+      return 0;
+  }
+};
+
 export default function PackageInfo({ packageData }: PackageInfoProps) {
   if (!packageData) {
     return (
@@ -34,26 +49,33 @@ export default function PackageInfo({ packageData }: PackageInfoProps) {
     );
   }
 
+  const { status } = packageData;
+  const progressWidth = getProgress(status);
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <div className="bg-white p-6 rounded-lg shadow-md mx-auto m-4 w-[100%]">
       <div className="space-y-4">
-        <p className="text-lg font-semibold">
-          <span className="font-bold">Status:</span> {packageData.status}
-        </p>
-        <p className="text-lg font-semibold">
-          <span className="font-bold">Destination:</span> {packageData.destination}
-        </p>
-        <p className="text-lg font-semibold">
-          <span className="font-bold">Created At:</span> {formatDate(packageData.createdAt)}
-        </p>
-        <p className="text-lg font-semibold">
-          <span className="font-bold">Arrived At:</span> {formatDate(packageData.arrivedAt)}
-        </p>
-        <p className="text-lg font-semibold">
-          <span className="font-bold">Received At:</span> {packageData.receivedAt ? formatDate(packageData.receivedAt) : 'N/A'}
-        </p>
+        <div className="relative w-full mt-3">
+          <div className="w-full bg-gray-200 h-1 rounded-full">
+            <div
+              className="h-1 bg-black rounded-full"
+              style={{ width: `${progressWidth}%` }}
+            ></div>
+          </div>
+          <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <span className={status === 'Processing' ? 'text-orange-600 font-semibold' : ''}>Processing</span>
+            <span className={status === 'Preparing to ship' ? 'text-orange-600 font-semibold' : ''}>Preparing to ship</span>
+            <span className={status === 'Shipped' ? 'text-orange-600 font-semibold' : ''}>Shipped</span>
+            <span className={status === 'Delivered' ? 'text-orange-600 font-semibold' : ''}>Delivered</span>
+          </div>
+        </div>
+        <div>
+          <p><strong>Destination:</strong> {packageData.destination}</p>
+          <p><strong>Created At:</strong> {formatDate(packageData.createdAt)}</p>
+          <p><strong>Received At:</strong> {formatDate(packageData.receivedAt)}</p>
+          <p><strong>Arrived At:</strong> {formatDate(packageData.arrivedAt)}</p>
+        </div>
       </div>
     </div>
   );
 }
-  
