@@ -14,25 +14,10 @@ export const GET = async(req: Request) => {
 }
 
 export const POST = async(req: Request) => {
-    console.log('sda')
     try{
-        const body: {
-            packages: {
-              packageNumber: string;
-              senderName: string;
-              senderPhoneNumber: string;
-              receiverName: string;
-              receiverPhoneNumber: string;
-              quantity: number;
-              weight: number;
-              volume: number;
-              cost: number;
-              status: string;
-              destination: string;
-            }[];
-          } = await req.json();
+        const body = await req.json()
       
-          const newPackages = await prisma.packages.createMany({
+          const newPackages = await prisma.packages.create({
             data: body.packages,    
           });
 

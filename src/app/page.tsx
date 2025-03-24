@@ -22,19 +22,19 @@ export default function HomePage() {
       },
       body: JSON.stringify({ packageNumber: searchValue }), // Correct body format
     })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.packages) {
-          setData(res.packages); // Update with the 'packages' object
-        } else {
-          alert("Ачаа олдсонгүй"); // Show error if package not found
-          setData(null); // Reset data
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
+    .then(res => res.json())
+    .then(res => {
+      if (res.packageData) {
+        setData(res.packageData);
+      } else {
+        alert('Ачаа олдсонгүй'); 
+        setData(null);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
   // useEffect hook to log data after it is updated
   useEffect(() => {}, [data]);

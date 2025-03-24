@@ -35,25 +35,21 @@ const PackageForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    // Handle package number input
     if (name === 'packageNumber' && value.length <= 4) {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
-    // Handle phone number inputs (sender and receiver phone numbers)
     else if (name === 'senderPhoneNumber' || name === 'receiverPhoneNumber') {
       if (value.length <= 8) {
         const formattedPhone = value.replace(/(\d{4})(\d{4})/, "$1-$2");
         setFormData(prev => ({ ...prev, [name]: formattedPhone }));
       }
     }
-    // Handle numeric inputs for quantity, weight, volume, and cost
     else if (name === 'quantity' || name === 'weight' || name === 'volume' || name === 'cost') {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue >= 0) {
         setFormData(prev => ({ ...prev, [name]: numericValue }));
       }
     } 
-    // Handle other inputs
     else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -86,25 +82,39 @@ const PackageForm = () => {
 
     if (validateForm()) {
       const sanitizedData = {
-        packages: [
+        packages: 
           {
             ...formData, 
             senderPhoneNumber: formData.senderPhoneNumber.replace(/-/g, ''),
             receiverPhoneNumber: formData.receiverPhoneNumber.replace(/-/g, ''),
             status: "Pending"
           }
-        ]
       };
 
-      const jsonData = await fetch("api/package", {
+      const response = await fetch("api/package", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify([sanitizedData])
-      });
+        body: JSON.stringify(sanitizedData)
+      })
 
-      console.log(await jsonData.json());
+      if (response.ok) {
+        setFormData({
+          packageNumber: '',
+          senderName: '',
+          senderPhoneNumber: '',
+          receiverName: '',
+          receiverPhoneNumber: '',
+          quantity: 0,
+          weight: 0,
+          volume: 0,
+          cost: 0,
+          destination: '',
+        })
+        alert('Package created')
+      }
+      setIsSubmitting(false)
     } else {
       setIsSubmitting(false);
     }
@@ -253,9 +263,9 @@ const PackageForm = () => {
             <button
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
             >
-              {/* {isSubmitting ? 'Submitting...' : 'Submit Package Information'} */}
+            {isSubmitting ? 'Submitting...' : 'Submit Package Information'}
             </button>
           </div>
         </div>
@@ -264,4 +274,5 @@ const PackageForm = () => {
   );
 };
 
-export default PackageForm;
+
+export default PackageForm
