@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const Footer = () => {
@@ -9,7 +8,9 @@ const Footer = () => {
           <h2 className="text-lg font-semibold flex items-center text-white">
             <span className="mr-2">🧊</span>A&N
           </h2>
-          <p className="text-sm mt-2">Энэ хотоос Эрдэнэт хот хүргэлт ачаа тээврийн үйлчилгээ</p>
+          <p className="text-sm mt-2">
+            Энэ хотоос Эрдэнэт хот хүргэлт ачаа тээврийн үйлчилгээ
+          </p>
           <p className="text-xs mt-4">© 2025 A&N</p>
         </div>
         <div className="text-right">
@@ -24,8 +25,12 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-xs mt-6 flex space-x-6">
-        <a href="#" className="underline">Terms and conditions</a>
-        <a href="#" className="underline">Privacy policy</a>
+        <a href="#" className="underline">
+          Terms and conditions
+        </a>
+        <a href="#" className="underline">
+          Privacy policy
+        </a>
       </div>
     </footer>
   );
