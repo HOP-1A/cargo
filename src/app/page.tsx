@@ -5,40 +5,39 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import PackageInfo from "./components/packageInfo";
+import PackageInfo from "./ilgeemj/page";
 import Footer from "./components/footer";
 
 export default function HomePage() {
   const router = useRouter();
 
-  const [searchValue, setSearchValue] = useState('');  
-  const [data, setData] = useState(null); 
+  const [searchValue, setSearchValue] = useState("");
+  const [data, setData] = useState(null); // Initialize as null to handle the case where no data is returned
 
   const search = async () => {
-    const jsonData = await fetch('api/package/serial', {
-      method: 'POST',
+    const jsonData = await fetch("api/package/serial", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json", // Ensure the request is sent as JSON
       },
-      body: JSON.stringify({ packageNumber: searchValue })
+      body: JSON.stringify({ packageNumber: searchValue }), // Correct body format
     })
-    .then(res => res.json())
-    .then(res => {
-      if (res.packageData) {
-        setData(res.packageData);
-      } else {
-        alert('Ачаа олдсонгүй'); 
-        console.log(res)
-        setData(null);
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.packages) {
+          setData(res.packages); // Update with the 'packages' object
+        } else {
+          alert("Ачаа олдсонгүй"); // Show error if package not found
+          setData(null); // Reset data
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-  useEffect(() => {
-  }, [data]);
+  // useEffect hook to log data after it is updated
+  useEffect(() => {}, [data]);
 
   return (
     <div className="whiteheader flex-center flex-column mt-[100px]">
@@ -47,16 +46,16 @@ export default function HomePage() {
         <span className="rainbow-text">Тээвэр үйлчилгээ</span>
       </h1>
       <div className="flex w-[100%] flex-center">
-        <Input placeholder="Кодоор хайх..." className="search-input" onChange={(e) => setSearchValue(e.target.value)} />
-        <Button onClick={search} className="cursor-pointer h-[40px] rounded-l-none bg-blue-600">Search</Button>
+        <Input
+          placeholder="Кодоор хайх..."
+          className="search-input"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <Button onClick={search}>Search</Button>
       </div>
-      
+
       <div>
-        {data ? (
-          <PackageInfo packageData={data}></PackageInfo>
-        ) : (
-          <p></p>
-        )}
+        {data ? <PackageInfo packageData={data}></PackageInfo> : <p></p>}
       </div>
 
       <div className="flexrow">
@@ -67,7 +66,7 @@ export default function HomePage() {
           <Button className="button2 cursor-pointer">Тооцоолуур</Button>
         </Link>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
