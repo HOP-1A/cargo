@@ -37,14 +37,14 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >  
+        >
           <header>
-            <Header/>
+            <Header />
           </header>
           {children}
-          <Footer />
         </body>
       </html>
+      <Footer />
     </ClerkProvider>
   );
 }
