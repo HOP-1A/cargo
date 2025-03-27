@@ -5,42 +5,40 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import PackageInfo from "./ilgeemj/page";
-import Footer from "./components/footer";
+import PackageInfo from "./components/packageInfo"
 
 export default function HomePage() {
   const router = useRouter();
 
   const [searchValue, setSearchValue] = useState("");
-  const [data, setData] = useState(null); // Initialize as null to handle the case where no data is returned
+  const [data, setData] = useState(null);
 
   const search = async () => {
     const jsonData = await fetch("api/package/serial", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Ensure the request is sent as JSON
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ packageNumber: searchValue }), // Correct body format
+      body: JSON.stringify({ packageNumber: searchValue }),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.packages) {
-          setData(res.packages); // Update with the 'packages' object
-        } else {
-          alert("Ачаа олдсонгүй"); // Show error if package not found
-          setData(null); // Reset data
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
+    .then(res => res.json())
+    .then(res => {
+      if (res.packageData) {
+        setData(res.packageData);
+      } else {
+        alert('Ачаа олдсонгүй'); 
+        setData(null);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
-  // useEffect hook to log data after it is updated
   useEffect(() => {}, [data]);
 
   return (
-    <div className="whiteheader flex-center flex-column mt-[100px]">
+    <div className="whiteheader flex-center flex-column h-[60dvh]">
       <h1 className="h1-text"> Эрээн, Эрдэнэт</h1>
       <h1>
         <span className="rainbow-text">Тээвэр үйлчилгээ</span>
@@ -48,14 +46,18 @@ export default function HomePage() {
       <div className="flex w-[100%] flex-center">
         <Input
           placeholder="Кодоор хайх..."
-          className="search-input"
+          className="search-input outline-none"
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <Button onClick={search}>Search</Button>
+        <Button className="rounded-l-none h-[39.5px]" onClick={search}>Search</Button>
       </div>
-
-      <div>
-        {data ? <PackageInfo packageData={data}></PackageInfo> : <p></p>}
+      
+      <div className="w-[80vw]">
+        {data ? (
+          <PackageInfo packageData={data}></PackageInfo>
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div className="flexrow">
@@ -66,7 +68,6 @@ export default function HomePage() {
           <Button className="button2 cursor-pointer">Тооцоолуур</Button>
         </Link>
       </div>
-      <Footer />
-    </div>
+    </div> 
   );
 }
