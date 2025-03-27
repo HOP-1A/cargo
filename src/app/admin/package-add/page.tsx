@@ -91,7 +91,7 @@ const PackageForm = () => {
           }
       };
 
-      const response = await fetch("api/package", {
+      const response = await fetch("/api/admin/package", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
