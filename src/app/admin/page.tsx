@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import { DropdownMenuRadioGroupDemo } from "../components/dropdown";
 import { useRouter } from "next/navigation";
 
-
-
 type Delivery = {
-
   id: string;
   packageNumber: string;
   senderName: string;
@@ -15,16 +12,16 @@ type Delivery = {
   receiverPhoneNumber: string;
   quantity: number;
   weight: number;
-  status: "In Transit" | "Delivered" | "Pending" | "Shipped"; 
-}
+  status: "In Transit" | "Delivered" | "Pending" | "Shipped";
+};
 
 export default function Home() {
-  const [deliveries, setDeliveries] = useState<Delivery[]>([]); 
-  const [searchQuery, setSearchQuery] = useState<string>(""); 
-  const [isLoading, setIsLoading] = useState<boolean>(true); 
-  const [error, setError] = useState<string | null>(null); 
+  const [deliveries, setDeliveries] = useState<Delivery[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const fetchDeliveries = async () => {
     try {
@@ -35,7 +32,7 @@ export default function Home() {
       const data = await response.json();
       setDeliveries(data.packages);
       setIsLoading(false);
-    } catch (err) {
+    } catch {
       setError("Failed to load deliveries.");
       setIsLoading(false);
     }
@@ -48,7 +45,9 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
-        <div className="text-xl font-semibold text-gray-600">Loading deliveries...</div>
+        <div className="text-xl font-semibold text-gray-600">
+          Loading deliveries...
+        </div>
       </div>
     );
   }
@@ -100,16 +99,27 @@ export default function Home() {
   });
 
   const totalDeliveries = filteredDeliveries.length;
-  const inTransit = filteredDeliveries.filter((d) => d.status === "In Transit").length;
-  const delivered = filteredDeliveries.filter((d) => d.status === "Delivered").length;
-  const pending = filteredDeliveries.filter((d) => d.status === "Pending").length;
-  const shipped = filteredDeliveries.filter((d) => d.status === "Shipped").length;
+  const inTransit = filteredDeliveries.filter(
+    (d) => d.status === "In Transit"
+  ).length;
+  const delivered = filteredDeliveries.filter(
+    (d) => d.status === "Delivered"
+  ).length;
+  const pending = filteredDeliveries.filter(
+    (d) => d.status === "Pending"
+  ).length;
+  const shipped = filteredDeliveries.filter(
+    (d) => d.status === "Shipped"
+  ).length;
 
   return (
     <div className="max-h-screen bg-gray-50 p-6 over">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Cargo Admin</h1>
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300" onClick={() => router.push('/admin/packadd')}>
+        <button
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
+          onClick={() => router.push("/admin/packadd")}
+        >
           New Delivery
         </button>
       </div>
@@ -125,23 +135,47 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mb-6">
-        <StatCard title="Total Deliveries" value={totalDeliveries} change="+2.5% from last month" />
-        <StatCard title="In Transit" value={inTransit} change="Currently on the road" />
-        <StatCard title="Delivered" value={delivered} change="Completed successfully" />
+        <StatCard
+          title="Total Deliveries"
+          value={totalDeliveries}
+          change="+2.5% from last month"
+        />
+        <StatCard
+          title="In Transit"
+          value={inTransit}
+          change="Currently on the road"
+        />
+        <StatCard
+          title="Delivered"
+          value={delivered}
+          change="Completed successfully"
+        />
         <StatCard title="Pending" value={pending} change="Order Processing" />
-        <StatCard title="Shipped" value={shipped} change="Available for pick up" />
+        <StatCard
+          title="Shipped"
+          value={shipped}
+          change="Available for pick up"
+        />
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Delivery List</h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          Delivery List
+        </h2>
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100">
               <th className="p-4 text-left text-gray-600">Ачааны дугаар</th>
               <th className="p-4 text-left text-gray-600">Илгээгчийн нэр</th>
-              <th className="p-4 text-left text-gray-600">Илгээгчийн утасны дугаар</th>
-              <th className="p-4 text-left text-gray-600">Хүлээн авагчийн нэр</th>
-              <th className="p-4 text-left text-gray-600">Хүлээн авагчийн утасны дугаар</th>
+              <th className="p-4 text-left text-gray-600">
+                Илгээгчийн утасны дугаар
+              </th>
+              <th className="p-4 text-left text-gray-600">
+                Хүлээн авагчийн нэр
+              </th>
+              <th className="p-4 text-left text-gray-600">
+                Хүлээн авагчийн утасны дугаар
+              </th>
               <th className="p-4 text-left text-gray-600">ширхэг</th>
               <th className="p-4 text-left text-gray-600">байдал</th>
               <th className="p-4 text-left text-gray-600">Кг/эзэлхүүн</th>
@@ -150,17 +184,22 @@ export default function Home() {
           </thead>
           <tbody>
             {filteredDeliveries.map((d) => (
-              <tr key={d.id} className="border-b hover:bg-gray-50 transition-all duration-300">
+              <tr
+                key={d.id}
+                className="border-b hover:bg-gray-50 transition-all duration-300"
+              >
                 <td className="p-4">{d.packageNumber}</td>
                 <td className="p-4">{d.senderName}</td>
                 <td className="p-4">{d.senderPhoneNumber}</td>
                 <td className="p-4">{d.receiverName}</td>
                 <td className="p-4">{d.receiverPhoneNumber}</td>
                 <td className="p-4">{d.quantity}ш</td>
-                <td className={`p-4 ${getStatusColor(d.status)}`}>{d.status}</td>
+                <td className={`p-4 ${getStatusColor(d.status)}`}>
+                  {d.status}
+                </td>
                 <td className="p-4">{d.weight}Кг</td>
                 <td className="p-4">
-                  <DropdownMenuRadioGroupDemo 
+                  <DropdownMenuRadioGroupDemo
                     id={d.id}
                     currentStatus={d.status}
                     onStatusChange={updateDeliveryStatus}
@@ -175,7 +214,15 @@ export default function Home() {
   );
 }
 
-function StatCard({ title, value, change }: { title: string, value: number, change: string }) {
+function StatCard({
+  title,
+  value,
+  change,
+}: {
+  title: string;
+  value: number;
+  change: string;
+}) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
       <h3 className="text-gray-600 text-lg">{title}</h3>

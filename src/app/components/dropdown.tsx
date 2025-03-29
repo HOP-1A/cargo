@@ -10,15 +10,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export function DropdownMenuRadioGroupDemo({ id, currentStatus, onStatusChange }) {
+type DropdownMenuRadioGroupDemoProps = {
+  id: string;
+  currentStatus: "Pending" | "Delivered" | "In Transit" | "Shipped";
+  onStatusChange: (_id: string, _status: string) => Promise<void>;
+};
+export function DropdownMenuRadioGroupDemo({
+  id,
+  currentStatus,
+  onStatusChange,
+}: DropdownMenuRadioGroupDemoProps) {
   const [status, setStatus] = useState(currentStatus);
 
-  const handleStatusChange = (newStatus) => {
-    setStatus(newStatus);
-    onStatusChange(id, newStatus); 
-  
+  const handleStatusChange = (newStatus: string) => {
+    setStatus(newStatus as "Pending" | "Delivered" | "In Transit" | "Shipped");
+    onStatusChange(id, newStatus);
   };
 
   return (
@@ -29,13 +37,19 @@ export function DropdownMenuRadioGroupDemo({ id, currentStatus, onStatusChange }
       <DropdownMenuContent className="w-40">
         <DropdownMenuLabel>Package Status</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={status} onValueChange={handleStatusChange}>
-          <DropdownMenuRadioItem value="Delivered">Delivered</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup
+          value={status}
+          onValueChange={handleStatusChange}
+        >
+          <DropdownMenuRadioItem value="Delivered">
+            Delivered
+          </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="Pending">Pending</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="In Transit">In Transit</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="In Transit">
+            In Transit
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
-

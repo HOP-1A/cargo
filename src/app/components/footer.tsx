@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
           </h2>
           <ul className="text-sm mt-2 space-y-2 flex flex-col">
             <li>
-              <a href="/">Эхлэл</a>
+              <Link href="/">Эхлэл</Link>
             </li>
             <li>
               <a href="/tootsooluur">Тооцоолуур</a>

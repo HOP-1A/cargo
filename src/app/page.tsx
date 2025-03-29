@@ -12,7 +12,7 @@ export default function HomePage() {
   const [data, setData] = useState(null);
 
   const search = async () => {
-    const jsonData = await fetch("api/package/serial", {
+    await fetch("api/package/serial", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

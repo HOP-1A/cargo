@@ -1,9 +1,6 @@
 import { Card, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
 
 export const HuleenAwagchiinMedeelel = () => {
-  const [awagchiinNer, setAwagchiinNer] = useState("");
-  const [awagchiinDugaar, setawagchiinDugaar] = useState();
   return (
     <>
       <Card className="py-5 px-8 w-[480px] h-full ">
