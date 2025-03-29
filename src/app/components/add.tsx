@@ -4,10 +4,8 @@ import { HuleenAwagchiinMedeelel } from "./HuleenAwagchiinMedeelel";
 import { MainInfo } from "./MainInfo";
 
 const PackageForm = ({
-  selected,
   setSelected,
 }: {
-  selected: string;
   setSelected: (selected: string) => void;
 }) => {
   const [awagchiinNer, setAwagchiinNer] = useState("");
