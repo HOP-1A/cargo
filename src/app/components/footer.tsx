@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-950 text-gray-400 py-16 flex flex-col items-center w-full absolute bottom-0">
+    <footer className="bg-blue-900 text-gray-400 py-16 flex flex-col items-center w-full absolute bottom-0 h-[250px]">
       <div className="flex justify-between w-full max-w-6xl px-8">
         <div className="text-left">
           <h2 className="text-lg font-semibold flex items-center text-white">
@@ -17,10 +17,16 @@ const Footer = () => {
           <h2 className="text-lg font-semibold flex items-center justify-end text-white">
             <span className="mr-2">❤️</span>
           </h2>
-          <ul className="text-sm mt-2 space-y-2">
-            <li>Эхлэл</li>
-            <li>Тооцоолуур</li>
-            <li>Заавар</li>
+          <ul className="text-sm mt-2 space-y-2 flex flex-col">
+            <li>
+              <a href="/">Эхлэл</a>
+            </li>
+            <li>
+              <a href="/tootsooluur">Тооцоолуур</a>
+            </li>
+            <li>
+              <a href="/instructions.php">Заавар</a>
+            </li>
           </ul>
         </div>
       </div>

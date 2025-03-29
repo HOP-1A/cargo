@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "../components/footer";
 
 const UserInfo = () => {
   const [username, setUsername] = useState("");
@@ -76,7 +77,7 @@ const UserInfo = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center h-[75vh]">
       <Card className="w-[400px] p-6 shadow-md rounded-lg">
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
@@ -131,6 +132,7 @@ const UserInfo = () => {
           </div>
 
           <Button
+            className="bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
             variant="default"
             onClick={handleSave}
             aria-label="Save User Information"
@@ -139,6 +141,7 @@ const UserInfo = () => {
           </Button>
         </CardContent>
       </Card>
+      <Footer />
     </div>
   );
 };

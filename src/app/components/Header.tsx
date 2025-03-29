@@ -13,7 +13,7 @@ import {
 export default function Header() {
   return (
     <ClerkProvider>
-      <div className="whiteheader flex-column bg-white">
+      <div className="whiteheader flex-column bg-white shadow-md">
         <nav className="flexrow">
           <div className="nav-logo">
             <Link href={"/"}>

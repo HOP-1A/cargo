@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Phone } from "lucide-react";
 import { MapPinned } from "lucide-react";
+import Footer from "../components/footer";
 
 export default function HomePage() {
   const [length, setLength] = useState<number | null>(null);
@@ -50,7 +51,7 @@ export default function HomePage() {
   }, [length, height, width, weight]);
 
   return (
-    <div className="flex space-x-6 justify-center items-center h-full">
+    <div className="flex space-x-6 justify-center items-center h-[70vh]">
       <div className="flex flex-col p-6 bg-white rounded-lg w-lg">
         <div className="w-full space-y-4 mt-4">
           <div>
@@ -137,6 +138,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

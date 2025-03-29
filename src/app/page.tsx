@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PackageInfo from "./components/packageInfo";
+import Footer from "./components/footer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -38,8 +39,16 @@ export default function HomePage() {
   useEffect(() => {}, [data]);
 
   return (
-    <div className="whiteheader flex-center flex-column h-[60dvh]">
-      <h1 className="h1-text"> Эрээн, Эрдэнэт</h1>
+    <div
+      className="whiteheader flex-center flex-column h-[75dvh]"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1587149185211-28a2ef4c9a10?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <h1 className="h1-text text-white"> Эрээн, Эрдэнэт</h1>
       <h1>
         <span className="rainbow-text">Тээвэр үйлчилгээ</span>
       </h1>
@@ -73,6 +82,7 @@ export default function HomePage() {
           </Button>
         </Link>
       </div>
+      <Footer />
     </div>
   );
 }
