@@ -82,11 +82,11 @@ export default function PackageInfo({ packageData }: PackageInfoProps) {
             </li>
           </ol>
         </div>
-        <div>
-          {status === 'Pending' && <p>Pending is shet</p>}
-          {status === 'In Transit' && <p>Таны ачаа </p>}
-          {status === 'Shipped' && <p>Shipped is shet</p>}
-          {status === 'Delivered' && <p>Delivered is shet</p>}
+        <div className="flex justify-center p-4">
+          {status === 'Pending' && <p>Таны ачааг бүртгэж байна</p>}
+          {status === 'In Transit' && <p>Таны ачаа замдаа гарсан</p>}
+          {status === 'Shipped' && <p>Таны ачаа хүлээн авсан</p>}
+          {status === 'Delivered' && <p>Таны ачаа тараагдсан</p>}
         </div>
       </div>
     </div>
