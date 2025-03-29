@@ -1,32 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { IlgeegchiinMedeelel } from "./IlgeegchiinMedeelel";
 import { HuleenAwagchiinMedeelel } from "./HuleenAwagchiinMedeelel";
+import { MainInfo } from "./MainInfo";
 
-const PackageForm = () => {
+const PackageForm = ({
+  setSelected,
+}: {
+  setSelected: (selected: string) => void;
+}) => {
+  const [awagchiinNer, setAwagchiinNer] = useState("");
+  const [awagchiinDugaar, setawagchiinDugaar] = useState("");
+  const [ilgeegchiinNer, setIlgeegchiinNer] = useState("");
+  const [ilgeegchiinDugaar, setIlgeegchiinDugaar] = useState("");
+  const [category, setCategory] = useState('Agaar')
+  const [desc, setDesc] = useState("")
   return (
-    <div className="flex justify-around items-center px-75">
-      <div className="w-[465px] h-[306px] bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-semibold">Package нэмэх</h2>
-        <div className="mt-4">
-          <h3 className="text-lg font-medium">Үндсэн мэдээлэл</h3>
-          <div className="mt-4">
-            <label className="block text-sm font-medium">Төрөл</label>
-            <select className="border p-2 rounded w-full">
-              <option>Aгаар</option>
-              <option>Газар</option>
-            </select>
-          </div>
-
-          <div className="mt-4">
-            <label className="block text-sm font-medium">
-              Илгээмжийн тайлбар
-            </label>
-           <textarea name=""  className="border p-2 rounded w-full" id=""></textarea>
-          </div>
-        </div>
+    <div>
+      <h3 className="text-[1.8rem] font-semibold m-5 mb-[50px]">
+        Package нэмэх
+      </h3>
+      <div className="flex justify-center gap-[50px] items-center">
+        <MainInfo category={category} setCategory={setCategory} desc={desc} setDesc={setDesc} />
+        <IlgeegchiinMedeelel
+          ilgeegchiinNer={ilgeegchiinNer}
+          setIlgeegchiinNer={setIlgeegchiinNer}
+          ilgeegchiinDugaar={ilgeegchiinDugaar}
+          setIlgeegchiinDugaar={setIlgeegchiinDugaar}
+        />
+        <HuleenAwagchiinMedeelel
+          awagchiinNer={awagchiinNer}
+          awagchiinDugaar={awagchiinDugaar}
+          setAwagchiinNer={setAwagchiinNer}
+          setawagchiinDugaar={setawagchiinDugaar}
+        />
       </div>
-      <HuleenAwagchiinMedeelel/>
-      <IlgeegchiinMedeelel/>
+      <div className=" mt-12 flex gap-1 justify-center">
+        <button className="bg-blue-800 font-semibold py-[10px] px-5 rounded-sm text-[14.4px] text-white cursor-pointer" >
+          Нэмэх
+        </button>
+        <button
+          className="bg-gray-400 font-semibold py-[10px] px-5 rounded-sm text-[14.4px] text-white cursor-pointer"
+          onClick={() => setSelected("displayPackage")}
+        >
+          Болих
+        </button>
+      </div>
     </div>
   );
 };
