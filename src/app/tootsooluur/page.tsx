@@ -13,6 +13,19 @@ export default function HomePage() {
 
   const [cargoPrice, setCargoPrice] = useState<number | null>(null);
 
+  const handleInputChange = (
+    value: string,
+    setValue: (value: number | null) => void
+  ) => {
+    if (value === "") {
+      setValue(null);
+    } else if (/^\d+$/.test(value)) {
+      setValue(Number(value));
+    } else {
+      setValue(null);
+    }
+  };
+
   useEffect(() => {
     const calculateCargoPrice = () => {
       if (
@@ -21,6 +34,7 @@ export default function HomePage() {
         width === null ||
         weight === null
       ) {
+        setCargoPrice(null);
         return;
       }
 
@@ -56,44 +70,36 @@ export default function HomePage() {
           <div>
             <label className="block font-medium">Урт (см):</label>
             <Input
-              type="number"
-              value={length === null ? "" : length}
-              onChange={(e) =>
-                setLength(e.target.value ? Number(e.target.value) : null)
-              }
+              type="text"
+              value={length === null ? "" : String(length)}
+              onChange={(e) => handleInputChange(e.target.value, setLength)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Өндөр (см):</label>
             <Input
-              type="number"
-              value={height === null ? "" : height}
-              onChange={(e) =>
-                setHeight(e.target.value ? Number(e.target.value) : null)
-              }
+              type="text"
+              value={height === null ? "" : String(height)}
+              onChange={(e) => handleInputChange(e.target.value, setHeight)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Өргөн (см):</label>
             <Input
-              type="number"
-              value={width === null ? "" : width}
-              onChange={(e) =>
-                setWidth(e.target.value ? Number(e.target.value) : null)
-              }
+              type="text"
+              value={width === null ? "" : String(width)}
+              onChange={(e) => handleInputChange(e.target.value, setWidth)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Жин (кг):</label>
             <Input
-              type="number"
-              value={weight === null ? "" : weight}
-              onChange={(e) =>
-                setWeight(e.target.value ? Number(e.target.value) : null)
-              }
+              type="text"
+              value={weight === null ? "" : String(weight)}
+              onChange={(e) => handleInputChange(e.target.value, setWeight)}
               className="w-full border p-2 rounded"
             />
           </div>
