@@ -35,20 +35,19 @@ export const PUT = async (req: Request) => {
     try {
       const body = await req.json();
   
-      const packageIds = body.packageIds;
+      const packageIds = body.packageId;
       const newStatus = body.status;
   
       const result = await prisma.packages.updateMany({
         where: {
           id: {
-            in: packageIds.map((id: string) => String(id))
+            in: Array.isArray(packageIds) ? packageIds.map((id: string) => String(id)) : [String(packageIds)]
           }
         },
         data: {
           status: newStatus
-        }
+        } 
       });
-  
       return NextResponse.json('Done');
     } catch (err) {
       return NextResponse.json(err, { status: 500 });

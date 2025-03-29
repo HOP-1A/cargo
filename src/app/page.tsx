@@ -3,14 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PackageInfo from "./components/packageInfo";
 import Footer from "./components/footer";
 
 export default function HomePage() {
-  const router = useRouter();
-
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState(null);
 
@@ -66,7 +63,7 @@ export default function HomePage() {
         </Button>
       </div>
 
-      <div className="w-[80vw]">
+      <div className="max-w-[500px] w-[100%]">
         {data ? <PackageInfo packageData={data}></PackageInfo> : <p></p>}
       </div>
 
