@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import Footer from "../components/footer";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
+  const { user } = useUser();
+  const userId = user?.id
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,6 +19,29 @@ const UserInfo = () => {
   const [addressError, setAddressError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try { 
+        const response = await fetch("/api/user?userId=" + userId);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await response.json();
+        setUsername(data.name);
+        setEmail(data.email);
+        setPhone(data.phoneNumber);
+        setAddress(data.location);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -27,7 +54,6 @@ const UserInfo = () => {
     setEmail(value);
     validateEmail(value);
   };
-
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -65,14 +91,38 @@ const UserInfo = () => {
     return true;
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (
       validateUsername(username) &&
       validateEmail(email) &&
       validatePhone(phone) &&
       validateAddress(address)
     ) {
-      console.log("User info saved!", { username, email, phone, address });
+      const userData = {
+        userId: user?.id,
+        name: username,
+        email,
+        phoneNumber: phone,
+        location: address,
+      };
+
+      try {
+        const response = await fetch("/api/user", {
+          method: "PUT", 
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save user data");
+        }
+
+        console.log("User info updated successfully");
+      } catch (error) {
+        console.error("Error saving user data:", error);
+      }
     }
   };
 
