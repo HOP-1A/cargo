@@ -113,7 +113,7 @@ export default function Home() {
   ).length;
 
   return (
-    <div className="max-h-screen bg-gray-50 p-6 over">
+    <div className="min-h-screen bg-gray-50 p-6 over">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Cargo Admin</h1>
         <button
@@ -174,7 +174,7 @@ export default function Home() {
                 Хүлээн авагчийн нэр
               </th>
               <th className="p-4 text-left text-gray-600">
-                Хүлээн авагчийн утасны дугаар
+                Х/а утасны дугаар
               </th>
               <th className="p-4 text-left text-gray-600">ширхэг</th>
               <th className="p-4 text-left text-gray-600">байдал</th>
