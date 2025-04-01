@@ -18,6 +18,7 @@ model Users {
   location    String?     
   updatedAt   DateTime   @updatedAt
   createdAt   DateTime   @default(now())
+   clerkId    String     @unique
 }
 
 model Packages {
