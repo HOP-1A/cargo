@@ -5,12 +5,14 @@ const isAdminRoute = createRouteMatcher(['/admin(.*)'])
 
 export default clerkMiddleware(async (auth, req) => {
   // Protect all routes starting with `/admin`
-  if (isAdminRoute(req) && (await auth()).sessionClaims?.metadata?.role !== 'admin') {
-    const url = new URL('/testt', req.url)
+  if (
+    isAdminRoute(req) &&
+    ((await auth()).sessionClaims?.metadata as { role?: string })?.role !== 'admin'
+  ) {
+    const url = new URL('/', req.url)
     return NextResponse.redirect(url)
   }
-})
-
+});
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params

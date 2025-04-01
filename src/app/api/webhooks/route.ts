@@ -49,20 +49,19 @@ export async function POST(req: Request) {
   // Do something with payload
   // For this guide, log payload to console
 
-  const eventType = evt.type
-    //   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
-    //   console.log('Webhook payload:', body)
-if(evt.type === 'user.created'){
-    console.log('userId:',evt.data.id)
-    const{id,email_addresses,first_name}=evt.data
-    prisma.users.create({
-        data:{
-        name:first_name ?? "",
-        clerkId:id,
-        email:email_addresses[0].email_address
-        }
+  //   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+  //   console.log('Webhook payload:', body)
+  if (evt.type === 'user.created') {
+    console.log('userId:', evt.data.id)
+    const { id, email_addresses, first_name } = evt.data
+    await prisma.users.create({
+      data: {
+        name: first_name ?? "",
+        clerkId: id,
+        email: email_addresses[0].email_address
+      }
     })
-}
+  }
 
   return new Response('Webhook received', { status: 200 })
 }

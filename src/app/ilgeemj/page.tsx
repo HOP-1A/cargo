@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect } from "react";
 import Package from "../components/add";
 import { useState } from "react";
 import AddPackage from "../components/AddPackage";
@@ -10,11 +9,9 @@ const Page = () => {
   return (
     <div style={{ fontFamily: "sans-serif", padding: "20px" }}>
       {selected === "displayPackage" && (
-        <AddPackage  setSelected={setSelected} />
+        <AddPackage setSelected={setSelected} />
       )}
-      {selected === "addPackage" && (
-        <Package  setSelected={setSelected} />
-      )}
+      {selected === "addPackage" && <Package setSelected={setSelected} />}
     </div>
   );
 };
