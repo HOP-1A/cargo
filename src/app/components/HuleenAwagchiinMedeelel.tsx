@@ -5,11 +5,19 @@ export const HuleenAwagchiinMedeelel = ({
   awagchiinDugaar,
   setAwagchiinNer,
   setawagchiinDugaar,
+  isAwagchiinDugaarEmpty,
+  setisAwagchiinNerEmpty,
+  setisAwagchiinDugaarEmpty,
+  isAwagchiinNerEmpty,
 }: {
   awagchiinNer: string;
   awagchiinDugaar: string;
   setAwagchiinNer: (ner: string) => void;
   setawagchiinDugaar: (dugaar: string) => void;
+  isAwagchiinDugaarEmpty: boolean;
+  setisAwagchiinNerEmpty: (p: boolean) => void;
+  setisAwagchiinDugaarEmpty: (p: boolean) => void;
+  isAwagchiinNerEmpty: boolean;
 }) => {
   return (
     <>
@@ -25,8 +33,14 @@ export const HuleenAwagchiinMedeelel = ({
               className=" border-1 border-gray-300 py-2 px-4 w-[192.5px] rounded-sm"
               placeholder="asdf"
               value={awagchiinNer}
-              onChange={(e) => setAwagchiinNer(e.target.value)}
+              onChange={(e) => {
+                if (awagchiinNer !== "") setisAwagchiinNerEmpty(false);
+                setAwagchiinNer(e.target.value);
+              }}
             />
+            {isAwagchiinNerEmpty && (
+              <p className="text-red-500">хоосон байж болохгүй</p>
+            )}
           </div>
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -36,8 +50,14 @@ export const HuleenAwagchiinMedeelel = ({
             className=" border-1 border-gray-300 py-2 px-4 w-[405px] rounded-sm"
             placeholder="12345678"
             value={awagchiinDugaar}
-            onChange={(e) => setawagchiinDugaar(e.target.value)}
+            onChange={(e) => {
+              if (awagchiinDugaar !== "") setisAwagchiinDugaarEmpty(false);
+              setawagchiinDugaar(e.target.value);
+            }}
           />
+          {isAwagchiinDugaarEmpty && (
+            <p className="text-red-500">хоосон байж болохгүй</p>
+          )}
         </div>
       </Card>
     </>
