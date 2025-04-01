@@ -184,7 +184,6 @@ function StatCard({ title, value, change }: { title: string, value: number, chan
     </div>
   );
 }
-
 function getStatusColor(status: string) {
   switch (status) {
     case "In Transit":
