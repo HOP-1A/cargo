@@ -6,12 +6,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import PackageInfo from "./components/packageInfo";
 import Footer from "./components/footer";
+import { toast } from "sonner";
 
 export default function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState(null);
+  const [load, setLoad] = useState('Хайх')
 
   const search = async () => {
+    setLoad('Хайж байна...')
     await fetch("api/package/serial", {
       method: "POST",
       headers: {
@@ -24,13 +27,14 @@ export default function HomePage() {
         if (res.packageData) {
           setData(res.packageData);
         } else {
-          alert("Ачаа олдсонгүй");
+          toast("Ачаа олдсонгүй")
           setData(null);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+    setLoad('Хайх')
   };
 
   useEffect(() => {}, [data]);
@@ -54,12 +58,13 @@ export default function HomePage() {
           placeholder="Кодоор хайх..."
           className="w-[500px] mb-6 px-4 py-2 text-black bg-white rounded-full shadow-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 ease-in-out hover:shadow-lg"
           onChange={(e) => setSearchValue(e.target.value)}
+          maxLength={4}
         />
         <Button
           onClick={search}
           className="hover:brightness-110 mb-6 hover:bg-indigo-600 hover:scale-105 font-bold py-3 px-6 rounded-full bg-indigo-500 shadow-lg shadow-indigo-500/50 text-white transition-all duration-300"
         >
-          Search
+          {load}
         </Button>
       </div>
 

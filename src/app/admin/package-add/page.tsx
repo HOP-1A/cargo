@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 type FormData = {
   packageNumber: string;
@@ -112,7 +113,7 @@ const PackageForm = () => {
           cost: 0,
           destination: '',
         })
-        alert('Package created')
+        toast('Package Created')
       }
       setIsSubmitting(false)
     } else {

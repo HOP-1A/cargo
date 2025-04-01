@@ -27,3 +27,27 @@ export const PUT = async (req: Request) => {
     return NextResponse.json(err, { status: 500 });
   }
 };
+
+export const POST = async (req: Request) => {
+  try{
+    const body = await req.json()
+
+    const name = body.name
+    const phoneNumber = body.phoneNumber
+    const email = body.email
+    const password = body.password
+
+    await prisma.users.create({
+      data: {
+        name: name,
+        phoneNumber:phoneNumber,
+        email: email,
+        password:password
+      }
+    })
+
+    return NextResponse.json("Created")
+  }catch(err){
+    return NextResponse.json(err, {status: 500})
+  }
+}
