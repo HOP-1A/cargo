@@ -50,6 +50,14 @@ export default function HomePage() {
     calculateCargoPrice();
   }, [length, height, width, weight]);
 
+  const handleNumericChange = (setter: React.Dispatch<React.SetStateAction<number | null>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Allow empty or numeric values only
+    if (/^\d*\.?\d*$/.test(value)) {
+      setter(value === "" ? null : Number(value));
+    }
+  };
+
   return (
     <div className="flex space-x-6 justify-center items-center h-[70vh]">
       <div className="flex flex-col p-6 bg-white rounded-lg w-lg">
@@ -57,44 +65,36 @@ export default function HomePage() {
           <div>
             <label className="block font-medium">Урт (см):</label>
             <Input
-              type="number"
+              type="text"
               value={length === null ? "" : length}
-              onChange={(e) =>
-                setLength(e.target.value ? Number(e.target.value) : null)
-              }
+              onInput={handleNumericChange(setLength)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Өндөр (см):</label>
             <Input
-              type="number"
+              type="text"
               value={height === null ? "" : height}
-              onChange={(e) =>
-                setHeight(e.target.value ? Number(e.target.value) : null)
-              }
+              onInput={handleNumericChange(setHeight)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Өргөн (см):</label>
             <Input
-              type="number"
+              type="text"
               value={width === null ? "" : width}
-              onChange={(e) =>
-                setWidth(e.target.value ? Number(e.target.value) : null)
-              }
+              onInput={handleNumericChange(setWidth)}
               className="w-full border p-2 rounded"
             />
           </div>
           <div>
             <label className="block font-medium">Жин (кг):</label>
             <Input
-              type="number"
+              type="text"
               value={weight === null ? "" : weight}
-              onChange={(e) =>
-                setWeight(e.target.value ? Number(e.target.value) : null)
-              }
+              onInput={handleNumericChange(setWeight)}
               className="w-full border p-2 rounded"
             />
           </div>
