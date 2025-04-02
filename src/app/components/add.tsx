@@ -1,59 +1,26 @@
 import React, { useState } from "react";
-import { IlgeegchiinMedeelel } from "./IlgeegchiinMedeelel";
-import { HuleenAwagchiinMedeelel } from "./HuleenAwagchiinMedeelel";
-import { MainInfo } from "./MainInfo";
+// import { IlgeegchiinMedeelel } from "./IlgeegchiinMedeelel";
+// import { HuleenAwagchiinMedeelel } from "./HuleenAwagchiinMedeelel";
+// import { MainInfo } from "./MainInfo";
 
-const PackageForm = ({
+const PackageForm = ({ 
   setSelected,
 }: {
   setSelected: (selected: string) => void;
 }) => {
-  const [awagchiinNer, setAwagchiinNer] = useState("");
-  const [awagchiinDugaar, setawagchiinDugaar] = useState("");
-  const [ilgeegchiinNer, setIlgeegchiinNer] = useState("");
-  const [ilgeegchiinDugaar, setIlgeegchiinDugaar] = useState("");
-  const [category, setCategory] = useState('Agaar')
-  const [desc, setDesc] = useState("")
-  const [isIlgeegchiinNerEmpty, setisIlgeegchiinNerEmpty] = useState(false)
-  const [isIlgeegchiinDugaarEmpty, setisIlgeegchiinDugaarEmpty] = useState(false)
-  const [isAwagchiinNerEmpty, setisAwagchiinNerEmpty] = useState(false)
-  const [isAwagchiinDugaarEmpty, setisAwagchiinDugaarEmpty] = useState(false)
-  const handleAdd = ()=>{
-    if(ilgeegchiinNer==="") setisIlgeegchiinNerEmpty(true) 
-    if(ilgeegchiinDugaar==="") setisIlgeegchiinDugaarEmpty(true)
-    if(awagchiinNer==="") setisAwagchiinNerEmpty(true)
-    if(awagchiinDugaar==="") setisAwagchiinDugaarEmpty(true)
-  }
+
+
+
   return (
     <div>
       <h3 className="text-[1.8rem] font-semibold m-5 mb-[50px]">
         Package нэмэх
       </h3>
       <div className="flex justify-center gap-[50px] items-center">
-        <MainInfo category={category} setCategory={setCategory} desc={desc} setDesc={setDesc} />
-        <IlgeegchiinMedeelel
-          ilgeegchiinNer={ilgeegchiinNer}
-          setIlgeegchiinNer={setIlgeegchiinNer}
-          ilgeegchiinDugaar={ilgeegchiinDugaar}
-          setIlgeegchiinDugaar={setIlgeegchiinDugaar}
-          isIlgeegchiinNerEmpty={isIlgeegchiinNerEmpty}
-          isIlgeegchiinDugaarEmpty={isIlgeegchiinDugaarEmpty}
-          setisIlgeegchiinNerEmpty={setisIlgeegchiinNerEmpty}
-          setisIlgeegchiinDugaarEmpty={setisIlgeegchiinDugaarEmpty}
-        />
-        <HuleenAwagchiinMedeelel
-          awagchiinNer={awagchiinNer}
-          awagchiinDugaar={awagchiinDugaar}
-          setAwagchiinNer={setAwagchiinNer}
-          setawagchiinDugaar={setawagchiinDugaar}
-          isAwagchiinDugaarEmpty={isAwagchiinDugaarEmpty}
-          setisAwagchiinNerEmpty={setisAwagchiinNerEmpty}
-          setisAwagchiinDugaarEmpty={setisAwagchiinDugaarEmpty}
-          isAwagchiinNerEmpty={isAwagchiinNerEmpty}
-        />
+
       </div>
       <div className=" mt-12 flex gap-1 justify-center">
-        <button className="bg-blue-800 font-semibold py-[10px] px-5 rounded-sm text-[14.4px] text-white cursor-pointer" onClick={handleAdd}>
+        <button className="bg-blue-800 font-semibold py-[10px] px-5 rounded-sm text-[14.4px] text-white cursor-pointer">
           Нэмэх
         </button>
         <button
