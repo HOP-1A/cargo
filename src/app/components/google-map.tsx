@@ -18,8 +18,8 @@ const AddressInput: React.FC<AddressInputProps> = ({ setAddress }) => {
   const handleSelect = useCallback((places: google.maps.places.PlaceResult[]) => {
     const place = places[0]; // We assume that the user selects the first result
     if (place.geometry) {
-      const { lat, lng } = place.geometry.location;
-      setLocation({ lat: lat(), lng: lng() });
+      // const { lat, lng } = place.geometry.location;
+      // setLocation({ lat: lat(), lng: lng() });
       const selectedAddress = place.formatted_address || '';
       setAddressState(selectedAddress); // Update local address state
       setAddress(selectedAddress); // Pass address to parent
@@ -47,7 +47,7 @@ const AddressInput: React.FC<AddressInputProps> = ({ setAddress }) => {
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!} libraries={["places"]}>
-      <div style={{ width: "50%", height: "400px" }}>
+      <div className="lg:w-[600px] h-[400px]">
         <GoogleMap
           id="address-map"
           mapContainerStyle={{ height: "100%", width: "100%" }}

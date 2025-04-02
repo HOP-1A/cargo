@@ -148,15 +148,15 @@ const Page = () => {
                             <span className="font-normal">{props.createdAt}</span>
                           </li>
                         </details>
-                        <Button className="cursor-pointer" onClick={() => setSelected(props)}>Газрын Зураг</Button>
+                        <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400" onClick={() => setSelected(props)}>Газрын Зураг</Button>
                       </div>
                     );
                   })}
             </div>
             {selected && 
-            <div className="w-[100%] gap-[10px] flex">
+            <div className="w-[100%] gap-[10px]">
               <AddressInput setAddress={setAddress}></AddressInput>
-              <Button className="cursor-pointer" onClick={() => deliverence()}>Хүргүүлэх</Button>
+              <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400 mt-[44px]" onClick={() => deliverence()}>Хүргүүлэх</Button>
             </div>
 
             }

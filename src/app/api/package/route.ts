@@ -17,8 +17,6 @@ export const POST = async (req: Request) => {
     try{
         const body = await req.json()
 
-        console.log(body)
-
         const packageId = body.packageId
         const deliveryLocation = body.deliveryLocation
 
