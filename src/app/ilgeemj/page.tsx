@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import AddressInput from "../components/google-map";
 import { toast } from "sonner";
 import { Map } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 type PackageDetailsProps = {
   id: string;
@@ -20,30 +21,35 @@ type PackageDetailsProps = {
 };
 
 const Page = () => {
+  const { user } = useUser();
+  const userId = user?.id
   const [data, setData] = useState<PackageDetailsProps[]>([]);
   const [selected, setSelected] = useState<PackageDetailsProps>()
   const [address, setAddress] = useState('')
 
   const packages = async () => {
-    await fetch("api/user/package", {
-      method: "POST",
+    await fetch("api/user/package?userId="+userId, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ phoneNumber: "12312313" }),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.packages) {
+        if (res.packages !== undefined) {
           setData(res.packages);
+        }else{
+          toast('Дугаар бүртгүүлэх хэрэгтэй')
         }
       })
       .catch((err) => console.error("Error fetching packages:", err));
   };
 
   useEffect(() => {
-    packages();
-  }, []);
+    if(userId !==undefined) {
+      packages();
+    }
+  }, [user]);
 
   const deliverence = async() => {
     const result = await fetch("api/package", {
