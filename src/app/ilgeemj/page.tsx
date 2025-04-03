@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import AddressInput from "../components/google-map";
 import { toast } from "sonner";
+import { Map } from "lucide-react";
 
 type PackageDetailsProps = {
   id: string;
@@ -66,50 +67,27 @@ const Page = () => {
     <div style={{ fontFamily: "sans-serif", padding: "20px" }}>
       <h2 className=" text-3xl font-semibold pb-[50px]">Илгээмж</h2>
       <div
+      className="flex justify-between flex-col"
         style={{
           backgroundColor: "white",
           padding: "20px",
           borderRadius: "5px",
         }}
       >
-        <div style={{ marginTop: "20px" }}>
-          <input
-            type="text"
-            placeholder="Хайх утга"
-            style={{
-              padding: "7px 15px",
-              marginRight: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "3px",
-            }}
-          />
-          <button
-            style={{
-              backgroundColor: "#bbbbbb",
-              color: "white",
-              padding: "5px 15px",
-              border: "none",
-              borderRadius: "3px",
-            }}
-          >
-            Хайх
-          </button>
-        </div>
-          <div className="flex gap-[100px]">
+          <div className="flex flex-col lg:flex-row lg:justify-center gap-[50px] mt-5">
             <div
-              className="font-semibold w-70"
+              className="font-semibold flex flex-col gap-4"
               style={{
-                marginTop: "20px",
                 padding: "15px",
                 borderRadius: "5px",
                 border: "gray  1px solid",
               }}
             >
               {data.length == 0 
-                ? <div key={'Null'} className="text-black">Ачаа байхгүй</div>
+                ? <div key={'Null'} className="text-black w-[]">Ачаа байхгүй</div>
                 : data?.map((props) => {
                     return (
-                      <div key={props.id} className="w-[100%] flex">
+                      <div key={props.id} className="w-[100%] flex justify-between">
                         <details className="p-2" key={props.id}>
                           <summary>
                             Ачааны дугаар:&nbsp;
@@ -144,19 +122,19 @@ const Page = () => {
                             <span className="font-normal">{props.cost}₮</span>
                           </li>
                           <li className="text-gray-300 text-xs">
-                            Илгээгчийн утасны дугаар:&nbsp;
+                            Хү:&nbsp;
                             <span className="font-normal">{props.createdAt}</span>
                           </li>
                         </details>
-                        <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400" onClick={() => setSelected(props)}>Газрын Зураг</Button>
+                        <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400" onClick={() => setSelected(props)}><span className="hidden sm:inline">Газрын Зураг</span> <Map/></Button>  
                       </div>
                     );
                   })}
             </div>
             {selected && 
-            <div className="w-[100%] gap-[10px]">
+            <div className="gap-[10px]">
               <AddressInput setAddress={setAddress}></AddressInput>
-              <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400 mt-[44px]" onClick={() => deliverence()}>Хүргүүлэх</Button>
+              <Button className="cursor-pointer bg-blue-600 hover:bg-blue-400 mt-[44px] w-[100%] lg:w-[600px]" onClick={() => deliverence()}>{selected.packageNumber}-г Хүргүүлэх</Button>
             </div>
 
             }

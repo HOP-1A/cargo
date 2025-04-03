@@ -47,7 +47,7 @@ const AddressInput: React.FC<AddressInputProps> = ({ setAddress }) => {
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!} libraries={["places"]}>
-      <div className="lg:w-[600px] h-[400px]">
+      <div className="w-[100%]  lg:w-[600px] h-[400px]">
         <GoogleMap
           id="address-map"
           mapContainerStyle={{ height: "100%", width: "100%" }}

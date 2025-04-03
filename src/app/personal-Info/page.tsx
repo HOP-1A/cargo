@@ -118,8 +118,6 @@ const UserInfo = () => {
         if (!response.ok) {
           throw new Error("Failed to save user data");
         }
-
-        console.log("User info updated successfully");
       } catch (error) {
         console.error("Error saving user data:", error);
       }
@@ -160,7 +158,7 @@ const UserInfo = () => {
             <Input
               placeholder="8000-0000"
               type="text"
-              value={phone.replace(/(\d{4})(\d{4})/, "$1-$2")}
+              value={phone != null ? phone.replace(/(\d{4})(\d{4})/, "$1-$2") : ""}
               onChange={handlePhoneChange}
               maxLength={9}
               required
