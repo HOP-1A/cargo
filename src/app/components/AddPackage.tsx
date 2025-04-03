@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -16,11 +16,7 @@ type PackageDetailsProps = {
   createdAt: string;
 };
 
-const Page = ({
-  setSelected,
-}: {
-  setSelected: (option: string) => void;
-}) => {
+const Page = ({ setSelected }: { setSelected: (option: string) => void }) => {
   const [data, setData] = useState<PackageDetailsProps[]>([]);
   const packages = async () => {
     await fetch("api/user/package", {
@@ -100,53 +96,57 @@ const Page = ({
             border: "gray  1px solid",
           }}
         >
-          {data.length == 0 
-            ? <div className="text-black">Ачаа байхгүй</div>
-            : data?.map((props) => {
-                return (
-                  <div className="w-[100%] flex">
-                    <details className="p-2" key={props.id}>
-                      <summary>
-                        Ачааны дугаар:&nbsp;
-                        <span className="font-normal">{props.packageNumber}</span>
-                      </summary>
-                      <li>
-                        Илгээгчийн нэр:&nbsp;
-                        <span className="font-normal">{props.senderName}</span>
-                      </li>
-                      <li>
-                        Илгээгчийн утасны дугаар:&nbsp;
-                        <span className="font-normal">
-                          {props.senderPhoneNumber}
-                        </span>
-                      </li>
-                      <li>
-                        Хүлээн авагчийн нэр:&nbsp;
-                        <span className="font-normal">{props.receiverName}</span>
-                      </li>
-                      <li>
-                        Хүлээн авагчийн утасны дугаар:&nbsp;
-                        <span className="font-normal">
-                          {props.receiverPhoneNumber}
-                        </span>
-                      </li>
-                      <li>
-                        Ачааны тоо:&nbsp;
-                        <span className="font-normal">{props.quantity}</span>
-                      </li>
-                      <li>
-                        Төлбөр:&nbsp;
-                        <span className="font-normal">{props.cost}₮</span>
-                      </li>
-                      <li className="text-gray-300 text-xs">
-                        Илгээгчийн утасны дугаар:&nbsp;
-                        <span className="font-normal">{props.createdAt}</span>
-                      </li>
-                    </details>
-                    <Button onClick={() => setSelected("addPackage")}>Хүргүүлэх</Button>
-                  </div>
-                );
-              })}
+          {data.length == 0 ? (
+            <div className="text-black">Ачаа байхгүй</div>
+          ) : (
+            data?.map((props) => {
+              return (
+                <div className="w-[100%] flex" key={props.id}>
+                  <details className="p-2" key={props.id}>
+                    <summary>
+                      Ачааны дугаар:&nbsp;
+                      <span className="font-normal">{props.packageNumber}</span>
+                    </summary>
+                    <li>
+                      Илгээгчийн нэр:&nbsp;
+                      <span className="font-normal">{props.senderName}</span>
+                    </li>
+                    <li>
+                      Илгээгчийн утасны дугаар:&nbsp;
+                      <span className="font-normal">
+                        {props.senderPhoneNumber}
+                      </span>
+                    </li>
+                    <li>
+                      Хүлээн авагчийн нэр:&nbsp;
+                      <span className="font-normal">{props.receiverName}</span>
+                    </li>
+                    <li>
+                      Хүлээн авагчийн утасны дугаар:&nbsp;
+                      <span className="font-normal">
+                        {props.receiverPhoneNumber}
+                      </span>
+                    </li>
+                    <li>
+                      Ачааны тоо:&nbsp;
+                      <span className="font-normal">{props.quantity}</span>
+                    </li>
+                    <li>
+                      Төлбөр:&nbsp;
+                      <span className="font-normal">{props.cost}₮</span>
+                    </li>
+                    <li className="text-gray-300 text-xs">
+                      Илгээгчийн утасны дугаар:&nbsp;
+                      <span className="font-normal">{props.createdAt}</span>
+                    </li>
+                  </details>
+                  <Button onClick={() => setSelected("addPackage")}>
+                    Хүргүүлэх
+                  </Button>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

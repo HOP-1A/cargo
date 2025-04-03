@@ -6,11 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import Footer from "../components/footer";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
   const { user } = useUser();
-  const userId = user?.id
+  const userId = user?.id;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -19,11 +18,10 @@ const UserInfo = () => {
   const [addressError, setAddressError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try { 
+      try {
         const response = await fetch("/api/user?userId=" + userId);
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
@@ -108,7 +106,7 @@ const UserInfo = () => {
 
       try {
         const response = await fetch("/api/user", {
-          method: "PUT", 
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -158,7 +156,9 @@ const UserInfo = () => {
             <Input
               placeholder="8000-0000"
               type="text"
-              value={phone != null ? phone.replace(/(\d{4})(\d{4})/, "$1-$2") : ""}
+              value={
+                phone != null ? phone.replace(/(\d{4})(\d{4})/, "$1-$2") : ""
+              }
               onChange={handlePhoneChange}
               maxLength={9}
               required

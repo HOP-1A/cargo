@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const GET = async (_req: Request) => {
     try {
         const packages = await prisma.packages.findMany();
@@ -14,24 +15,24 @@ export const GET = async (_req: Request) => {
 }
 
 export const POST = async (req: Request) => {
-    try{
+    try {
         const body = await req.json()
 
         const packageId = body.packageId
         const deliveryLocation = body.deliveryLocation
 
-        const deliverence = await prisma.packages.update({
+        await prisma.packages.update({
             where: {
-                id:packageId
+                id: packageId
             },
             data: {
                 delivery: true,
-                deliveryLocation: deliveryLocation    
+                deliveryLocation: deliveryLocation
             }
         })
-        
+
         return NextResponse.json('Done')
-    }catch(err){
-        return NextResponse.json(err, {status: 500})
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 })
     }
 }
