@@ -118,7 +118,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-gray-800">Cargo Admin</h1>
         <button
           className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
-          onClick={() => router.push("/admin/packadd")}
+          onClick={() => router.push("/admin/package-add")}
         >
           New Delivery
         </button>
